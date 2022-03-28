@@ -1,2 +1,2 @@
 # ImageMatch
-A Small game designed by xamarin
+A Small mobile game designed using xamarin
