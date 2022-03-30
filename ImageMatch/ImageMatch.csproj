@@ -6,12 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />  
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\" />
     <None Remove="Assets\img2.png" />
+    <None Remove="Com.Airbnb.Xamarin.Forms.Lottie" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
