@@ -14,7 +14,7 @@ namespace ImageMatch
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new AppShell();
+            MainPage = new GamePage();
         }
 
         protected override void OnStart()
