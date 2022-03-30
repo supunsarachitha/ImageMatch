@@ -6,7 +6,6 @@
     <ContentPage.Content>
         <Grid  x:Name="gamegrid" 
               VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-           
         </Grid>
     </ContentPage.Content>
 </ContentPage>
