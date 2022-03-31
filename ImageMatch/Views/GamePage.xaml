@@ -2,7 +2,7 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="ImageMatch.Views.GamePage" BackgroundColor="Black">
+    x:Class="ImageMatch.Views.GamePage" BackgroundColor="Black" BackgroundImageSource="https://pixabay.com/get/g476e39a132061ecfd26ef4ce7dd6417bf586513677e5468f357f2034e09595bb95fa8ce02b4a772b56046def16404608_1280.png">
     <ContentPage.Content>
         <Grid  x:Name="gamegrid" 
               VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
