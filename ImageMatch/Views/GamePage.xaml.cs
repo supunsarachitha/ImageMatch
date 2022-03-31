@@ -19,8 +19,8 @@ namespace ImageMatch.Views
 
 			GetRemoteImages();
 
-			int colCount = 6;
-			int rowCount = 6;
+			int colCount = 5;
+			int rowCount = 8;
 			int SimilarSets = 1;
 
 			var random = new Random();
@@ -37,13 +37,14 @@ namespace ImageMatch.Views
 					Button button = new Button()
 					{
 						CornerRadius = 25,
-						BackgroundColor= Color.Transparent,
+						BackgroundColor= Color.WhiteSmoke,
 						WidthRequest= 50,
 						HeightRequest=50,
-						HorizontalOptions=LayoutOptions.Fill,
+						HorizontalOptions=LayoutOptions.FillAndExpand,
 						BorderColor=Color.WhiteSmoke,
 						BorderWidth = 1,
-						ImageSource=""
+						ImageSource="",
+						VerticalOptions = LayoutOptions.FillAndExpand,
 					};
                     button.Clicked += Button_Clicked;
 					gamegrid.Children.Add(button, column, row); //view , column, row
