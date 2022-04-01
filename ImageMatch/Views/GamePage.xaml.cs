@@ -76,7 +76,7 @@ namespace ImageMatch.Views
 			int i = 0;
 			remoteImageList.Add(new RemoteImageList()
 			{
-				Id = i,
+				Id = 1,
 				URL= "https://www.iconfinder.com/icons/3316547/download/png/128"
 			});
 
@@ -90,6 +90,12 @@ namespace ImageMatch.Views
 			{
 				Id = 3,
 				URL = "https://www.iconfinder.com/icons/3316544/download/png/128"
+			});
+
+			remoteImageList.Add(new RemoteImageList()
+			{
+				Id = 4,
+				URL = "https://www.iconfinder.com/icons/3305207/download/png/128"
 			});
 
 		}
