@@ -92,12 +92,6 @@ namespace ImageMatch.Views
 				URL = "https://www.iconfinder.com/icons/3316544/download/png/128"
 			});
 
-			remoteImageList.Add(new RemoteImageList()
-			{
-				Id = 4,
-				URL = "https://www.iconfinder.com/icons/3305207/download/png/128"
-			});
-
 		}
 
         private void Button_Clicked(object sender, EventArgs e)
