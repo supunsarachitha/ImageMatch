@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    >
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:lottie_fileName="14348-just-a-pigeon.json"
+        app:lottie_autoPlay="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:scaleType="centerInside"
+        />
+
+
+    <TextView
+        android:layout_below="@id/animation_view"
+        android:fontFamily="cursive"
+        android:textStyle="bold"
+        android:textSize="70sp"
+        android:text="Image Match"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:contentDescription="brandName"
+        android:textColor="#009bff"/>
+
+</RelativeLayout>
