@@ -1,11 +1,26 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="ImageMatch.Views.GamePage" BackgroundColor="Black" BackgroundImageSource="https://pixabay.com/get/g476e39a132061ecfd26ef4ce7dd6417bf586513677e5468f357f2034e09595bb95fa8ce02b4a772b56046def16404608_1280.png">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+    x:Class="ImageMatch.Views.GamePage" BackgroundColor="Black">
     <ContentPage.Content>
-        <Grid  x:Name="gamegrid" 
-              VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+        <Grid>
+            <Image Source="https://pixabay.com/get/g476e39a132061ecfd26ef4ce7dd6417bf586513677e5468f357f2034e09595bb95fa8ce02b4a772b56046def16404608_1280.png" Aspect="AspectFill" Opacity="0.9" />
+            
+            <forms:AnimationView IsVisible="false"
+                    x:Name="animationView_win"
+                    AutoPlay="False"
+                    Animation="Assets.58795-sparkle-animation.json"
+                    AnimationSource="EmbeddedResource"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    RepeatMode="Restart"
+                    OnFinishedAnimation="animationView_win_OnFinishedAnimation"
+                    RepeatCount="1"/>
+
+            <Grid  x:Name="gamegrid" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></Grid>
+
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>
