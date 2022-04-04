@@ -14,11 +14,15 @@
     <None Remove="Assets\" />
     <None Remove="Assets\img2.png" />
     <None Remove="Com.Airbnb.Xamarin.Forms.Lottie" />
+    <None Remove="Assets\31548-robot-says-hello.json" />
+    <None Remove="Assets\58795-sparkle-animation.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\img2.png" />
+    <EmbeddedResource Include="Assets\31548-robot-says-hello.json" />
+    <EmbeddedResource Include="Assets\58795-sparkle-animation.json" />
   </ItemGroup>
 </Project>
