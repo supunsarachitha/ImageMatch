@@ -72,8 +72,6 @@ namespace ImageMatch.Views
 
         private void GetRemoteImages()
         {
-			
-			int i = 0;
 			remoteImageList.Add(new RemoteImageList()
 			{
 				Id = 1,
@@ -142,6 +140,8 @@ namespace ImageMatch.Views
 				if (similarItems!=null && similarItems.Count()>0)
                 {
 					selected.IsMatched = true;
+					animationView_win.IsVisible = true;
+					animationView_win.PlayAnimation();
 				}
                 else
                 {
@@ -155,6 +155,12 @@ namespace ImageMatch.Views
 
 			SelectedIcons.Add(selected);
 
+		}
+
+        void animationView_win_OnFinishedAnimation(System.Object sender, System.EventArgs e)
+        {
+			animationView_win.IsVisible = false;
+			animationView_win.StopAnimation();
 		}
     }
 
