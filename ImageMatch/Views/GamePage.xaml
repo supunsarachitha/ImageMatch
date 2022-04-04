@@ -16,7 +16,7 @@
                     HorizontalOptions="FillAndExpand"
                     RepeatMode="Restart"
                     OnFinishedAnimation="animationView_win_OnFinishedAnimation"
-                    RepeatCount="1"/>
+                    RepeatCount="0"/>
 
             <Grid  x:Name="gamegrid" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"></Grid>
 
