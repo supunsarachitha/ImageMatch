@@ -122,7 +122,7 @@ namespace ImageMatch.Views
 				var similarItems = SelectedIcons.Where(x => x.TypeId== selected.TypeId);
 
 
-				if (similarItems!=null && similarItems.Count()> SimilarSets)
+				if (similarItems!=null && similarItems.Count()>= SimilarSets)
                 {
 					selected.IsMatched = true;
 					animationView_win.IsVisible = true;
