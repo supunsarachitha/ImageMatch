@@ -11,6 +11,9 @@ namespace ImageMatch.Views
 		public List<SelectedItems> SelectedIcons= new List<SelectedItems>();
 		List<RemoteImageList> remoteImageList = new List<RemoteImageList>();
 		List<SelectedItems> hiddenImageList = new List<SelectedItems>();
+		int SimilarSets = 2;
+		int colCount = 5;
+		int rowCount = 8;
 
 
 		public GamePage ()
@@ -19,12 +22,7 @@ namespace ImageMatch.Views
 
 			GetRemoteImages();
 
-			int colCount = 5;
-			int rowCount = 8;
-			int SimilarSets = 1;
-
 			var random = new Random();
-
 
 			int hiddenImageListId = 0;
 
@@ -94,19 +92,6 @@ namespace ImageMatch.Views
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-
-			////clear un-matching images
-			//if (SelectedIcons.Count > 1)
-			//{
-			//	var unmatchItem = SelectedIcons.Where(x => x.IsMatched==false).FirstOrDefault();
-			//	if(unmatchItem != null)
-			//	{
-			//		unmatchItem.Button.ImageSource = "";
-			//		SelectedIcons.Remove(unmatchItem);
-				
-			//	}
-			//}
-
 			//create an object by selected button and add to a list
 			SelectedItems selected = new SelectedItems();
 			selected.Button = (Button)sender;
@@ -137,7 +122,7 @@ namespace ImageMatch.Views
 				var similarItems = SelectedIcons.Where(x => x.TypeId== selected.TypeId);
 
 
-				if (similarItems!=null && similarItems.Count()>0)
+				if (similarItems!=null && similarItems.Count()>= SimilarSets)
                 {
 					selected.IsMatched = true;
 					animationView_win.IsVisible = true;
