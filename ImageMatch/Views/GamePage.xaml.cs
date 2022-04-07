@@ -11,10 +11,12 @@ namespace ImageMatch.Views
 		public List<SelectedItems> SelectedIcons= new List<SelectedItems>();
 		List<RemoteImageList> remoteImageList = new List<RemoteImageList>();
 		List<SelectedItems> hiddenImageList = new List<SelectedItems>();
-		int SimilarSets = 2;
+		int SimilarSets = 1; //decide how many similar images should be selected to earn points
 		int colCount = 5;
 		int rowCount = 8;
-
+		int mainImageId = 1; //decide which image should be selected to earn points
+		int score = 0;
+		int totalMatchingImagesCount = 0;
 
 		public GamePage ()
 		{
@@ -66,6 +68,10 @@ namespace ImageMatch.Views
 					hiddenImageListId++;
 				}
 			}
+
+			//getting total matching images
+			totalMatchingImagesCount = hiddenImageList.Where(x => x.TypeId == mainImageId).Count();
+
 		}
 
         private void GetRemoteImages()
@@ -90,10 +96,12 @@ namespace ImageMatch.Views
 
 		}
 
+
+		SelectedItems selected;
         private void Button_Clicked(object sender, EventArgs e)
         {
 			//create an object by selected button and add to a list
-			SelectedItems selected = new SelectedItems();
+			selected  = new SelectedItems();
 			selected.Button = (Button)sender;
 			selected.GridRow = Grid.GetRow(selected.Button);
 			selected.GridColumn = Grid.GetColumn(selected.Button);
@@ -119,27 +127,40 @@ namespace ImageMatch.Views
 				}
 
 				//previous item
-				var similarItems = SelectedIcons.Where(x => x.TypeId== selected.TypeId);
+				var similarItems = SelectedIcons.Where(x => x.TypeId == mainImageId && x.TypeId == selected.TypeId);
 
-
-				if (similarItems!=null && similarItems.Count()>= SimilarSets)
+				
+				if (selected.TypeId == mainImageId)
                 {
-					selected.IsMatched = true;
-					animationView_win.IsVisible = true;
-					animationView_win.PlayAnimation();
+					Matched(selected);
 				}
                 else
                 {
 					selected.IsMatched = false;
 				}
 			}
-            else if (SelectedIcons.Count == 0)
+            else if (SelectedIcons.Count == 0 && selected.TypeId == mainImageId)
 			{
-				selected.IsMatched = true;
+				Matched(selected);
 			}
 
 			SelectedIcons.Add(selected);
 
+
+			//if total images count achived then show animation as winner
+			if (totalMatchingImagesCount == SelectedIcons.Where(x => x.TypeId == mainImageId).Count())
+            {
+				animationView_win.IsVisible = true;
+				animationView_win.PlayAnimation();
+			}
+
+		}
+
+        private void Matched(SelectedItems selected)
+        {
+			score = score + 1;
+			lblScore.Text = Convert.ToString(score);
+			selected.IsMatched = true;
 		}
 
         void animationView_win_OnFinishedAnimation(System.Object sender, System.EventArgs e)
