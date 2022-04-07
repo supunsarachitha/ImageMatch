@@ -16,13 +16,17 @@
     <None Remove="Com.Airbnb.Xamarin.Forms.Lottie" />
     <None Remove="Assets\31548-robot-says-hello.json" />
     <None Remove="Assets\58795-sparkle-animation.json" />
+    <None Remove="Assets\the-background-352165_1280.png" />
+    <None Remove="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\img2.png" />
     <EmbeddedResource Include="Assets\31548-robot-says-hello.json" />
     <EmbeddedResource Include="Assets\58795-sparkle-animation.json" />
+    <EmbeddedResource Include="Assets\the-background-352165_1280.png" />
   </ItemGroup>
 </Project>
