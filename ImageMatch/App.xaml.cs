@@ -3,6 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ImageMatch.Services;
 using ImageMatch.Views;
+using MediaManager;
 
 namespace ImageMatch
 {
@@ -12,7 +13,7 @@ namespace ImageMatch
         public App()
         {
             InitializeComponent();
-
+            CrossMediaManager.Current.Init();
             DependencyService.Register<MockDataStore>();
             MainPage = new GamePage();
         }
