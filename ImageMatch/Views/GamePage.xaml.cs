@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using MediaManager;
 using Xamarin.Forms;
 
 namespace ImageMatch.Views
@@ -21,7 +22,6 @@ namespace ImageMatch.Views
 		public GamePage ()
 		{
 			InitializeComponent ();
-
 			GetRemoteImages();
 
 			var random = new Random();
@@ -152,8 +152,15 @@ namespace ImageMatch.Views
             {
 				animationView_win.IsVisible = true;
 				animationView_win.PlayAnimation();
+				PlayWinSound();
+				
 			}
 
+		}
+
+        private async void PlayWinSound()
+        {
+			await CrossMediaManager.Current.Play("https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Yung_Kartz/July_2019/Yung_Kartz_-_02_-_Levels.mp3");
 		}
 
         private void Matched(SelectedItems selected)
