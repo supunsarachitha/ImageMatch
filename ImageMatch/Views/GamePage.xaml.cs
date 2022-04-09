@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
+using ImageMatch.Helpers;
 using MediaManager;
 using Xamarin.Forms;
 
@@ -13,65 +15,72 @@ namespace ImageMatch.Views
 		List<RemoteImageList> remoteImageList = new List<RemoteImageList>();
 		List<SelectedItems> hiddenImageList = new List<SelectedItems>();
 		int SimilarSets = 1; //decide how many similar images should be selected to earn points
-		int colCount = 5;
-		int rowCount = 8;
 		int mainImageId = 1; //decide which image should be selected to earn points
 		int score = 0;
 		int totalMatchingImagesCount = 0;
+		int failCount = 0;
 
 		public GamePage ()
 		{
 			InitializeComponent ();
-			GetRemoteImages();
 
-			var random = new Random();
+			InitGame();
+		}
 
-			int hiddenImageListId = 0;
+        private void InitGame()
+        {
+			Device.BeginInvokeOnMainThread(async() =>
+			{
+				GetRemoteImages();
 
-			for (int column = 0; column <= colCount; column++)
-            {
-                for (int row = 0; row < rowCount; row++)
-                {
-					
+				var random = new Random();
 
-					Button button = new Button()
+				int hiddenImageListId = 0;
+
+				for (int column = 0; column <= Common.GridColumnCount; column++)
+				{
+					for (int row = 0; row < Common.GridRowCount; row++)
 					{
-						CornerRadius = 25,
-						BackgroundColor= Color.WhiteSmoke,
-						WidthRequest= 50,
-						HeightRequest=50,
-						HorizontalOptions=LayoutOptions.FillAndExpand,
-						BorderColor=Color.WhiteSmoke,
-						BorderWidth = 1,
-						ImageSource="",
-						VerticalOptions = LayoutOptions.FillAndExpand,
-					};
-                    button.Clicked += Button_Clicked;
-					gamegrid.Children.Add(button, column, row); //view , column, row
+						Button button = new Button()
+						{
+							CornerRadius = 25,
+							BackgroundColor = Color.WhiteSmoke,
+							WidthRequest = 50,
+							HeightRequest = 50,
+							HorizontalOptions = LayoutOptions.FillAndExpand,
+							BorderColor = Color.WhiteSmoke,
+							BorderWidth = 1,
+							ImageSource = "",
+							VerticalOptions = LayoutOptions.FillAndExpand,
+						};
+						button.Clicked += Button_Clicked;
+						gamegrid.Children.Add(button, column, row); //view , column, row
 
 
-					//creating a map and assign images to a list randomly
-					var nextImageIndex = random.Next(remoteImageList.Count);
-					var nextImage = remoteImageList[nextImageIndex];
-					
-					hiddenImageList.Add(
-					new SelectedItems
-					{
-						ImageUrl = nextImage.URL,
-						Id = hiddenImageListId,
-						GridColumn = column,
-						GridRow = row,
-						IsMatched = false,
-						TypeId = nextImage.Id
-					});
+						//creating a map and assign images to a list randomly
+						var nextImageIndex = random.Next(remoteImageList.Count);
+						var nextImage = remoteImageList[nextImageIndex];
 
-					hiddenImageListId++;
+						hiddenImageList.Add(
+						new SelectedItems
+						{
+							ImageUrl = nextImage.URL,
+							Id = hiddenImageListId,
+							GridColumn = column,
+							GridRow = row,
+							IsMatched = false,
+							TypeId = nextImage.Id
+						});
+
+						hiddenImageListId++;
+					}
 				}
-			}
 
-			//getting total matching images
-			totalMatchingImagesCount = hiddenImageList.Where(x => x.TypeId == mainImageId).Count();
+				//getting total matching images
+				totalMatchingImagesCount = hiddenImageList.Where(x => x.TypeId == mainImageId).Count();
+			});
 
+			
 		}
 
         private void GetRemoteImages()
@@ -111,6 +120,13 @@ namespace ImageMatch.Views
 			
 			selected.TypeId = selectedHiddenItem.TypeId;
 			selected.Button.ImageSource = selectedHiddenItem.ImageUrl;
+			//selected.Button.RotateTo(360, 200);
+
+
+			Task.WhenAll(
+			  selected.Button.RotateYTo(251 * 180, 250)
+			);
+			selected.Button.CancelAnimations();
 
 			if (SelectedIcons.Count > 0)
 			{
@@ -136,6 +152,7 @@ namespace ImageMatch.Views
 				}
                 else
                 {
+					failCount = failCount + 1;
 					selected.IsMatched = false;
 				}
 			}
@@ -146,6 +163,7 @@ namespace ImageMatch.Views
 
 			SelectedIcons.Add(selected);
 
+			//lets take final decisions
 
 			//if total images count achived then show animation as winner
 			if (totalMatchingImagesCount == SelectedIcons.Where(x => x.TypeId == mainImageId).Count())
@@ -153,14 +171,30 @@ namespace ImageMatch.Views
 				animationView_win.IsVisible = true;
 				animationView_win.PlayAnimation();
 				PlayWinSound();
-				
 			}
 
+			//check fail count
+			if(failCount >= Common.MaxFailAttemptCount)
+            {
+				DisplayAlert("", "You loose!", "Ok");
+				ResetGame();
+            }
+
+		}
+
+        private void ResetGame()
+        {
+			failCount = 0;
+			score = 0;
+			totalMatchingImagesCount = 0;
+			SelectedIcons.Clear();
+			hiddenImageList.Clear();
+			InitGame();
 		}
 
         private async void PlayWinSound()
         {
-			await CrossMediaManager.Current.Play("https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Yung_Kartz/July_2019/Yung_Kartz_-_02_-_Levels.mp3");
+			await CrossMediaManager.Current.Play(Common.WinToneURL);
 		}
 
         private void Matched(SelectedItems selected)
