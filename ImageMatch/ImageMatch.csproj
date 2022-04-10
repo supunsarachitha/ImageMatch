@@ -27,9 +27,37 @@
     <None Remove="Audio\loosesound.mp3" />
     <None Remove="Audio\win-sound.mp3" />
     <None Remove="Audio\SmallWin.mp3" />
+    <None Remove="Assets\77789-heart-pump-slow.json" />
+    <None Remove="font\UbuntuBold.ttf" />
+    <None Remove="font\UbuntuBold.xml" />
+    <None Remove="font\FontAwsome\fa-solid-900.ttf" />
+    <None Remove="font\FontAwsome\fa-regular-400.woff2" />
+    <None Remove="font\FontAwsome\fa-v4compatibility.ttf" />
+    <None Remove="font\FontAwsome\fa-regular-400.ttf" />
+    <None Remove="font\FontAwsome\fa-v4compatibility.woff2" />
+    <None Remove="font\FontAwsome\fa-solid-900.woff2" />
+    <None Remove="font\FontAwsome\fa-brands-400.woff2" />
+    <None Remove="font\FontAwsome\fa-brands-400.ttf" />
+    <None Remove="Assets\99264-loading.json" />
+    <None Remove="font\FontAwsome\Font Awesome 6 Free-Regular-400.otf" />
+    <None Remove="Audio\518305__mrthenoronha__stage-clear-8-bit.mp3" />
+    <None Remove="Audio\614006__aarontheonly__roar3.mp3" />
+    <None Remove="Assets\82524-highest-level-reached.json" />
+    <None Remove="Assets\14496-medal.json" />
+    <None Remove="Assets\67154-duck.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="bin\Debug\netstandard2.0\ImageMatch.deps.json" />
+    <EmbeddedResource Remove="bin\Debug\netstandard2.0\ImageMatch.dll" />
+    <EmbeddedResource Remove="bin\Debug\netstandard2.0\ImageMatch.pdb" />
+    <EmbeddedResource Remove="bin\Debug\netstandard2.0\ref\ImageMatch.dll" />
+    <EmbeddedResource Remove="bin\Debug\netstandard2.0\ImageMatch.deps.json" />
+    <EmbeddedResource Remove="bin\Debug\netstandard2.0\ImageMatch.dll" />
+    <EmbeddedResource Remove="bin\Debug\netstandard2.0\ImageMatch.pdb" />
+    <EmbeddedResource Remove="bin\Debug\netstandard2.0\ref\ImageMatch.dll" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\31548-robot-says-hello.json" />
@@ -38,5 +66,23 @@
     <EmbeddedResource Include="Audio\LooseSound.mp3" />
     <EmbeddedResource Include="Audio\win-sound.mp3" />
     <EmbeddedResource Include="Audio\SmallWin.mp3" />
+    <EmbeddedResource Include="Assets\77789-heart-pump-slow.json" />
+    <EmbeddedResource Include="font\UbuntuBold.ttf" />
+    <EmbeddedResource Include="font\UbuntuBold.xml" />
+    <EmbeddedResource Include="font\FontAwsome\fa-solid-900.ttf" />
+    <EmbeddedResource Include="font\FontAwsome\fa-regular-400.woff2" />
+    <EmbeddedResource Include="font\FontAwsome\fa-v4compatibility.ttf" />
+    <EmbeddedResource Include="font\FontAwsome\fa-regular-400.ttf" />
+    <EmbeddedResource Include="font\FontAwsome\fa-v4compatibility.woff2" />
+    <EmbeddedResource Include="font\FontAwsome\fa-solid-900.woff2" />
+    <EmbeddedResource Include="font\FontAwsome\fa-brands-400.woff2" />
+    <EmbeddedResource Include="font\FontAwsome\fa-brands-400.ttf" />
+    <EmbeddedResource Include="Assets\99264-loading.json" />
+    <EmbeddedResource Include="font\FontAwsome\Font Awesome 6 Free-Regular-400.otf" />
+    <EmbeddedResource Include="Audio\518305__mrthenoronha__stage-clear-8-bit.mp3" />
+    <EmbeddedResource Include="Audio\614006__aarontheonly__roar3.mp3" />
+    <EmbeddedResource Include="Assets\82524-highest-level-reached.json" />
+    <EmbeddedResource Include="Assets\14496-medal.json" />
+    <EmbeddedResource Include="Assets\67154-duck.json" />
   </ItemGroup>
 </Project>
