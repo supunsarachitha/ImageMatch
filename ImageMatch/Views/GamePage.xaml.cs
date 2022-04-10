@@ -135,7 +135,7 @@ namespace ImageMatch.Views
 			//selected.Button.RotateTo(360, 200);
 
 
-			Task.WhenAll(
+			await Task.WhenAll(
 			  selected.Button.RotateYTo(251 * 180, 250)
 			);
 
