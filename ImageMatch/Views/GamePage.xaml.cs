@@ -26,72 +26,85 @@ namespace ImageMatch.Views
 		public GamePage ()
 		{
 			InitializeComponent ();
-			PlayWinSound();
-			PlaySound();
-			InitGame();
-
-		}
-
-		private async void PlaySound()
-        {
-
-			await CrossMediaManager.Current.PlayFromAssembly("False.mp3", null);
-		}
-
-        private void InitGame()
-        {
-			Device.BeginInvokeOnMainThread(async() =>
-			{
-				GetRemoteImages();
-
-				var random = new Random();
-
-				int hiddenImageListId = 0;
-
-				for (int column = 0; column <= Common.GridColumnCount; column++)
-				{
-					for (int row = 0; row < Common.GridRowCount; row++)
-					{
-						Button button = new Button()
-						{
-							CornerRadius = 25,
-							BackgroundColor = Color.WhiteSmoke,
-							WidthRequest = 50,
-							HeightRequest = 50,
-							HorizontalOptions = LayoutOptions.FillAndExpand,
-							BorderColor = Color.WhiteSmoke,
-							BorderWidth = 1,
-							ImageSource = "",
-							VerticalOptions = LayoutOptions.FillAndExpand,
-						};
-						button.Clicked += Button_Clicked;
-						gamegrid.Children.Add(button, column, row); //view , column, row
-
-
-						//creating a map and assign images to a list randomly
-						var nextImageIndex = random.Next(remoteImageList.Count);
-						var nextImage = remoteImageList[nextImageIndex];
-
-						hiddenImageList.Add(
-						new SelectedItems
-						{
-							ImageUrl = nextImage.URL,
-							Id = hiddenImageListId,
-							GridColumn = column,
-							GridRow = row,
-							IsMatched = false,
-							TypeId = nextImage.Id
-						});
-
-						hiddenImageListId++;
-					}
-				}
-
-				//getting total matching images
-				totalMatchingImagesCount = hiddenImageList.Where(x => x.TypeId == mainImageId).Count();
-			});
-
 			
+			InitGame();
+		}
+
+		private void PlaySound(string name)
+        {
+            var stream = GetStreamFromFile(name);
+            var audio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+            audio.Load(stream);
+            audio.Play();
+        }
+
+		Stream GetStreamFromFile(string filename)
+		{
+			var assembly = typeof(App).GetTypeInfo().Assembly;
+
+			var stream = assembly.GetManifestResourceStream("ImageMatch.Audio." + filename);
+
+			return stream;
+		}
+
+		private void InitGame()
+        {
+			
+			GetRemoteImages();
+
+			var random = new Random();
+			totalMatchingImagesCount = 0;
+			gamegrid.Children.Clear();
+			int hiddenImageListId = 0;
+			failCount = 0;
+			score = 0;
+			totalMatchingImagesCount = 0;
+			SelectedIcons.Clear();
+			hiddenImageList.Clear();
+			lblScore.Text = Convert.ToString(score);
+
+			for (int column = 0; column <= Common.GridColumnCount; column++)
+			{
+				for (int row = 0; row < Common.GridRowCount; row++)
+				{
+					Button button = new Button()
+					{
+						CornerRadius = 25,
+						BackgroundColor = Color.WhiteSmoke,
+						WidthRequest = 50,
+						HeightRequest = 50,
+						HorizontalOptions = LayoutOptions.FillAndExpand,
+						BorderColor = Color.WhiteSmoke,
+						BorderWidth = 1,
+						ImageSource = "",
+						VerticalOptions = LayoutOptions.FillAndExpand,
+					};
+					button.Clicked += Button_Clicked;
+					gamegrid.Children.Add(button, column, row); //view , column, row
+
+
+					//creating a map and assign images to a list randomly
+					var nextImageIndex = random.Next(remoteImageList.Count);
+					var nextImage = remoteImageList[nextImageIndex];
+
+					hiddenImageList.Add(
+					new SelectedItems
+					{
+						ImageUrl = nextImage.URL,
+						Id = hiddenImageListId,
+						GridColumn = column,
+						GridRow = row,
+						IsMatched = false,
+						TypeId = nextImage.Id
+					});
+
+					hiddenImageListId++;
+				}
+			}
+
+			//getting total matching images
+			totalMatchingImagesCount = hiddenImageList.Where(x => x.TypeId == mainImageId).Count();
+
 		}
 
         private void GetRemoteImages()
@@ -118,7 +131,7 @@ namespace ImageMatch.Views
 
 
 		SelectedItems selected;
-        private async void Button_Clicked(object sender, EventArgs e)
+        private void Button_Clicked(object sender, EventArgs e)
         {
 			//create an object by selected button and add to a list
 			selected  = new SelectedItems();
@@ -134,9 +147,7 @@ namespace ImageMatch.Views
 			//selected.Button.RotateTo(360, 200);
 
 
-			await Task.WhenAll(
-			  selected.Button.RotateYTo(251 * 180, 250)
-			);
+			
 
 			if (SelectedIcons.Count > 0)
 			{
@@ -158,6 +169,7 @@ namespace ImageMatch.Views
 				
 				if (selected.TypeId == mainImageId)
                 {
+					PlaySound("SmallWin.mp3");
 					Matched(selected);
 				}
                 else
@@ -168,10 +180,15 @@ namespace ImageMatch.Views
 			}
             else if (SelectedIcons.Count == 0 && selected.TypeId == mainImageId)
 			{
+				PlaySound("SmallWin.mp3");
 				Matched(selected);
 			}
 
 			SelectedIcons.Add(selected);
+
+			Task.WhenAll(
+			  selected.Button.RotateYTo(251 * 180, 250)
+			);
 
 			//lets take final decisions
 
@@ -186,30 +203,36 @@ namespace ImageMatch.Views
 			//check fail count
 			if(failCount >= Common.MaxFailAttemptCount)
             {
-			
-				bool res = await DisplayAlert("", "You loose!", "Restart", "Exit" );
-                if (res)
-                {
-					ResetGame();
-				}
-                else
-                {
-					Environment.Exit(0);
-                }
+				PlaySound("LooseSound.mp3");
 
-				
-            }
+				Device.BeginInvokeOnMainThread(async () =>
+				{
+					bool res=false;
+					if (Device.RuntimePlatform == Device.iOS)
+					{
+						res = await DisplayAlert("", "You loose!", "Restart", "Cancel");
+					}
+					else if (Device.RuntimePlatform == Device.Android)
+					{
+						res = await DisplayAlert("", "You loose!", "Restart", "Exit");
+					}
 
-		}
+					
+					if (res)
+					{
+						InitGame();
+					}
+					else
+					{
+						if (Device.RuntimePlatform == Device.Android)
+						{
+							Environment.Exit(0);
+						}
+					}
+				});
 
-        private void ResetGame()
-        {
-			failCount = 0;
-			score = 0;
-			totalMatchingImagesCount = 0;
-			SelectedIcons.Clear();
-			hiddenImageList.Clear();
-			InitGame();
+			}
+
 		}
 
         private async void PlayWinSound()
