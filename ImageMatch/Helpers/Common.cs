@@ -13,6 +13,8 @@ namespace ImageMatch.Helpers
 
 		public static int GridRowCount = 8;
 
+		public static string GamePageBackGroundImageURL = "";
+
 	}
 }
 
