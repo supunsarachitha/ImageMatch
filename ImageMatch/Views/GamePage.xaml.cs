@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using ImageMatch.Helpers;
 using MediaManager;
+using Plugin.SimpleAudioPlayer;
 using Xamarin.Forms;
 
 namespace ImageMatch.Views
-{	
+{
+
+
 	public partial class GamePage : ContentPage
 	{
 		public List<SelectedItems> SelectedIcons= new List<SelectedItems>();
@@ -23,8 +27,16 @@ namespace ImageMatch.Views
 		public GamePage ()
 		{
 			InitializeComponent ();
-
+			PlayWinSound();
+			PlaySound();
 			InitGame();
+
+		}
+
+		private async void PlaySound()
+        {
+
+			await CrossMediaManager.Current.PlayFromAssembly("False.mp3", null);
 		}
 
         private void InitGame()
@@ -107,7 +119,7 @@ namespace ImageMatch.Views
 
 
 		SelectedItems selected;
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
 			//create an object by selected button and add to a list
 			selected  = new SelectedItems();
@@ -126,7 +138,6 @@ namespace ImageMatch.Views
 			Task.WhenAll(
 			  selected.Button.RotateYTo(251 * 180, 250)
 			);
-			selected.Button.CancelAnimations();
 
 			if (SelectedIcons.Count > 0)
 			{
@@ -176,8 +187,18 @@ namespace ImageMatch.Views
 			//check fail count
 			if(failCount >= Common.MaxFailAttemptCount)
             {
-				DisplayAlert("", "You loose!", "Ok");
-				ResetGame();
+			
+				bool res = await DisplayAlert("", "You loose!", "Restart", "Exit" );
+                if (res)
+                {
+					ResetGame();
+				}
+                else
+                {
+					Environment.Exit(0);
+                }
+
+				
             }
 
 		}

@@ -11,10 +11,10 @@
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
     <PackageReference Include="Plugin.MediaManager.Forms" Version="1.1.0" />
     <PackageReference Include="Plugin.MediaManager" Version="1.1.0" />
+    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.5.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\" />
-    <None Remove="Assets\img2.png" />
     <None Remove="Com.Airbnb.Xamarin.Forms.Lottie" />
     <None Remove="Assets\31548-robot-says-hello.json" />
     <None Remove="Assets\58795-sparkle-animation.json" />
@@ -22,13 +22,14 @@
     <None Remove="Helpers\" />
     <None Remove="Plugin.MediaManager.Forms" />
     <None Remove="Plugin.MediaManager" />
+
+    <None Remove="Xam.Plugin.SimpleAudioPlayer" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Assets\img2.png" />
     <EmbeddedResource Include="Assets\31548-robot-says-hello.json" />
     <EmbeddedResource Include="Assets\58795-sparkle-animation.json" />
     <EmbeddedResource Include="Assets\the-background-352165_1280.png" />
