@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Threading.Tasks;
 using ImageMatch.Helpers;
 using MediaManager;
-using Plugin.SimpleAudioPlayer;
 using Xamarin.Forms;
 
 namespace ImageMatch.Views
