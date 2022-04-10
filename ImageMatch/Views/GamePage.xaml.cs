@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using ImageMatch.Helpers;
 using MediaManager;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ImageMatch.Views
@@ -19,9 +20,11 @@ namespace ImageMatch.Views
 		List<SelectedItems> hiddenImageList = new List<SelectedItems>();
 		int SimilarSets = 1; //decide how many similar images should be selected to earn points
 		int mainImageId = 1; //decide which image should be selected to earn points
+		int lifeLostImageId = 2; //reduce points
 		int score = 0;
 		int totalMatchingImagesCount = 0;
-		int failCount = 0;
+		int lifeCount = Common.MaxFailAttemptCount;
+		int GameLevel = 0;
 
 		public GamePage ()
 		{
@@ -53,15 +56,23 @@ namespace ImageMatch.Views
 			GetRemoteImages();
 
 			var random = new Random();
+
+			//level
+			GameLevel = Preferences.Get("LEVEL", 1);
+			lblLevelCount.Text = Convert.ToString(GameLevel);
+			Common.GridColumnCount = Math.Min(5, (Math.Max(2, GameLevel) + 1));
+			Common.GridRowCount = Math.Max(2,GameLevel+1) ;
+
 			totalMatchingImagesCount = 0;
 			gamegrid.Children.Clear();
 			int hiddenImageListId = 0;
-			failCount = 0;
+			lifeCount = lifeCount = Common.MaxFailAttemptCount;
 			score = 0;
 			totalMatchingImagesCount = 0;
 			SelectedIcons.Clear();
 			hiddenImageList.Clear();
 			lblScore.Text = Convert.ToString(score);
+			lblLifeCount.Text = Convert.ToString(lifeCount);
 
 			for (int column = 0; column <= Common.GridColumnCount; column++)
 			{
@@ -73,11 +84,12 @@ namespace ImageMatch.Views
 						BackgroundColor = Color.WhiteSmoke,
 						WidthRequest = 50,
 						HeightRequest = 50,
-						HorizontalOptions = LayoutOptions.FillAndExpand,
+						HorizontalOptions = LayoutOptions.CenterAndExpand,
 						BorderColor = Color.WhiteSmoke,
 						BorderWidth = 1,
-						ImageSource = "",
-						VerticalOptions = LayoutOptions.FillAndExpand,
+						Margin=1,
+						ImageSource = Common.GamePageBackGroundImageURL,
+						VerticalOptions = LayoutOptions.CenterAndExpand,
 					};
 					button.Clicked += Button_Clicked;
 					gamegrid.Children.Add(button, column, row); //view , column, row
@@ -104,7 +116,8 @@ namespace ImageMatch.Views
 
 			//getting total matching images
 			totalMatchingImagesCount = hiddenImageList.Where(x => x.TypeId == mainImageId).Count();
-
+			lblTargetCount.Text = totalMatchingImagesCount.ToString();
+			gamegrid.IsEnabled = true;
 		}
 
         private void GetRemoteImages()
@@ -127,6 +140,30 @@ namespace ImageMatch.Views
 				URL = "https://www.iconfinder.com/icons/3316544/download/png/128"
 			});
 
+			remoteImageList.Add(new RemoteImageList()
+			{
+				Id = 4,
+				URL = "https://www.iconfinder.com/icons/3316536/download/png/128"
+			});
+
+			remoteImageList.Add(new RemoteImageList()
+			{
+				Id = 5,
+				URL = "https://www.iconfinder.com/icons/3316538/download/png/128"
+			});
+
+			remoteImageList.Add(new RemoteImageList()
+			{
+				Id = 6,
+				URL = "https://www.iconfinder.com/icons/3316546/download/png/128"
+			});
+
+
+			remoteImageList.Add(new RemoteImageList()
+			{
+				Id = 7,
+				URL = "https://www.iconfinder.com/icons/3316540/download/png/128"
+			});
 		}
 
 
@@ -144,10 +181,6 @@ namespace ImageMatch.Views
 			
 			selected.TypeId = selectedHiddenItem.TypeId;
 			selected.Button.ImageSource = selectedHiddenItem.ImageUrl;
-			//selected.Button.RotateTo(360, 200);
-
-
-			
 
 			if (SelectedIcons.Count > 0)
 			{
@@ -172,9 +205,16 @@ namespace ImageMatch.Views
 					PlaySound("SmallWin.mp3");
 					Matched(selected);
 				}
+                else if(selected.TypeId  == lifeLostImageId)
+                {
+					//if life lost image we reduce life
+					lifeCount = lifeCount - 1;
+					lblLifeCount.Text = Convert.ToString(lifeCount);
+					selected.IsMatched = false;
+					PlaySound("614006__aarontheonly__roar3.mp3");
+				}
                 else
                 {
-					failCount = failCount + 1;
 					selected.IsMatched = false;
 				}
 			}
@@ -195,13 +235,36 @@ namespace ImageMatch.Views
 			//if total images count achived then show animation as winner
 			if (totalMatchingImagesCount == SelectedIcons.Where(x => x.TypeId == mainImageId).Count())
             {
+				gamegrid.IsEnabled = false;
 				animationView_win.IsVisible = true;
 				animationView_win.PlayAnimation();
 				PlayWinSound();
+
+				//next level
+
+
+				Device.BeginInvokeOnMainThread(async () =>
+				{
+					await Task.Delay(5000);
+					bool res = await DisplayAlert("", "Go to next level?", "Yes go to next level", "Replay this level");
+					if (res)
+					{
+						GameLevel = GameLevel + 1;
+						lblLevelCount.Text = Convert.ToString(GameLevel);
+						Preferences.Set("LEVEL", GameLevel);
+						InitGame();
+					}
+					else
+					{
+						InitGame();
+					}
+				});
+				
+
 			}
 
 			//check fail count
-			if(failCount >= Common.MaxFailAttemptCount)
+			if(lifeCount == 0)
             {
 				PlaySound("LooseSound.mp3");
 
@@ -235,22 +298,36 @@ namespace ImageMatch.Views
 
 		}
 
-        private async void PlayWinSound()
+        private void PlayWinSound()
         {
-			await CrossMediaManager.Current.Play(Common.WinToneURL);
+			PlaySound("518305__mrthenoronha__stage-clear-8-bit.mp3");
 		}
 
         private void Matched(SelectedItems selected)
         {
 			score = score + 1;
 			lblScore.Text = Convert.ToString(score);
+			lifeCount = lifeCount + 1;
+			lblLifeCount.Text = Convert.ToString(lifeCount);
 			selected.IsMatched = true;
+
+			lblTargetCount.Text = (totalMatchingImagesCount - score).ToString();
 		}
 
         void animationView_win_OnFinishedAnimation(System.Object sender, System.EventArgs e)
         {
 			animationView_win.IsVisible = false;
 			animationView_win.StopAnimation();
+		}
+
+		async void btnResetGame_Clicked(System.Object sender, System.EventArgs e)
+        {
+			bool res = await DisplayAlert("", "Restart again?", "Restart", "Cancel");
+            if (res)
+            {
+				InitGame();
+			}
+
 		}
     }
 

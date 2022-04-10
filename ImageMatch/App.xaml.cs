@@ -5,6 +5,7 @@ using ImageMatch.Services;
 using ImageMatch.Views;
 using MediaManager;
 
+
 namespace ImageMatch
 {
     public partial class App : Application

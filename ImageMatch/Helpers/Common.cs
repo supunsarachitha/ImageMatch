@@ -7,13 +7,14 @@ namespace ImageMatch.Helpers
 
 		public static string FailToneURL = "";
 
-		public static int MaxFailAttemptCount = 20;
+		public static int MaxFailAttemptCount = 5;
 
-		public static int GridColumnCount = 5;
+		public static int GridColumnCount =0;
 
-		public static int GridRowCount = 8;
+		public static int GridRowCount = 0;
 
-		public static string GamePageBackGroundImageURL = "";
+		public static string GamePageBackGroundImageURL = "https://www.iconfinder.com/icons/3305207/download/png/128";
+
 
 	}
 }
