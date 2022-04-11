@@ -15,8 +15,17 @@ namespace ImageMatch
         {
             InitializeComponent();
             CrossMediaManager.Current.Init();
-            DependencyService.Register<MockDataStore>();
-            MainPage = new GamePage();
+
+            bool firstTimeUser = Xamarin.Essentials.Preferences.Get("FIRST_TIME_USER", true);
+            if (firstTimeUser)
+            {
+                MainPage = new NavigationPage(new IntroductionPage());
+            }
+            else
+            {
+                MainPage = new GamePage();
+            }
+            
         }
 
         protected override void OnStart()

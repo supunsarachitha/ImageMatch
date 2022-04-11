@@ -45,9 +45,16 @@
     <None Remove="Assets\82524-highest-level-reached.json" />
     <None Remove="Assets\14496-medal.json" />
     <None Remove="Assets\67154-duck.json" />
+    <None Remove="Assets\peasant-drawing-4361592_640.png" />
+    <None Remove="ViewModels\" />
+    <None Remove="Assets\farm-background-4997623_1920.jpg" />
+    <None Remove="Assets\illustration-4558800_1920.png" />
+    <None Remove="Assets\2160-get-started-button.json" />
+    <None Remove="Audio\bensound-jazzcomedy.mp3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="bin\Debug\netstandard2.0\ImageMatch.deps.json" />
@@ -58,6 +65,8 @@
     <EmbeddedResource Remove="bin\Debug\netstandard2.0\ImageMatch.dll" />
     <EmbeddedResource Remove="bin\Debug\netstandard2.0\ImageMatch.pdb" />
     <EmbeddedResource Remove="bin\Debug\netstandard2.0\ref\ImageMatch.dll" />
+    <EmbeddedResource Remove="AppShell.xaml" />
+    <EmbeddedResource Remove="Views\LoginPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Assets\31548-robot-says-hello.json" />
@@ -84,5 +93,14 @@
     <EmbeddedResource Include="Assets\82524-highest-level-reached.json" />
     <EmbeddedResource Include="Assets\14496-medal.json" />
     <EmbeddedResource Include="Assets\67154-duck.json" />
+    <EmbeddedResource Include="Assets\peasant-drawing-4361592_640.png" />
+    <EmbeddedResource Include="Assets\farm-background-4997623_1920.jpg" />
+    <EmbeddedResource Include="Assets\illustration-4558800_1920.png" />
+    <EmbeddedResource Include="Assets\2160-get-started-button.json" />
+    <EmbeddedResource Include="Audio\bensound-jazzcomedy.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="AppShell.xaml.cs" />
+    <Compile Remove="Views\LoginPage.xaml.cs" />
   </ItemGroup>
 </Project>
