@@ -29,16 +29,16 @@ namespace ImageMatch.Views
 		public GamePage ()
 		{
 			InitializeComponent ();
-			
 			InitGame();
 		}
 
 		private void PlaySound(string name)
         {
             var stream = GetStreamFromFile(name);
-            var audio = Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
-            audio.Load(stream);
-            audio.Play();
+
+			Common.AudioPlayer.Load(stream);
+			Common.AudioPlayer.Play();
+
         }
 
 		Stream GetStreamFromFile(string filename)
@@ -187,13 +187,18 @@ namespace ImageMatch.Views
 				//selected item from list
 				var selectedIcon = SelectedIcons.Where(x => x.GridColumn == selected.GridColumn && x.GridRow == selected.GridRow).FirstOrDefault();
 
-				if(selectedIcon != null)
+
+				//todo - disable this by a setting
+				var invalid = SelectedIcons.Where(x => x.IsMatched == false).FirstOrDefault();
+				if (invalid != null)
 				{
 					//clear image from selected item list and 
-					selected.Button.ImageSource = "";
-
-					SelectedIcons.Remove(selectedIcon);
-					return;
+					invalid.Button.ImageSource = Common.GamePageBackGroundImageURL;
+					Task.WhenAll(
+						invalid.Button.RotateYTo(-251 * 180, 250)
+					);
+					SelectedIcons.Remove(invalid);
+					
 				}
 
 				//previous item
@@ -235,6 +240,9 @@ namespace ImageMatch.Views
 			//if total images count achived then show animation as winner
 			if (totalMatchingImagesCount == SelectedIcons.Where(x => x.TypeId == mainImageId).Count())
             {
+
+               //todo enable all images after win
+
 				gamegrid.IsEnabled = false;
 				animationView_win.IsVisible = true;
 				animationView_win.PlayAnimation();
