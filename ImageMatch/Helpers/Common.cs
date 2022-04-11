@@ -1,4 +1,6 @@
 ﻿using System;
+using Plugin.SimpleAudioPlayer;
+
 namespace ImageMatch.Helpers
 {
 	public class Common
@@ -15,7 +17,7 @@ namespace ImageMatch.Helpers
 
 		public static string GamePageBackGroundImageURL = "https://www.iconfinder.com/icons/3305207/download/png/128";
 
-
+		public static ISimpleAudioPlayer AudioPlayer= Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
 	}
 }
 
