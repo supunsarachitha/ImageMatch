@@ -51,6 +51,7 @@
     <None Remove="Assets\illustration-4558800_1920.png" />
     <None Remove="Assets\2160-get-started-button.json" />
     <None Remove="Audio\bensound-jazzcomedy.mp3" />
+    <None Remove="Assets\safari-4136674_640.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
@@ -98,6 +99,7 @@
     <EmbeddedResource Include="Assets\illustration-4558800_1920.png" />
     <EmbeddedResource Include="Assets\2160-get-started-button.json" />
     <EmbeddedResource Include="Audio\bensound-jazzcomedy.mp3" />
+    <EmbeddedResource Include="Assets\safari-4136674_640.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="AppShell.xaml.cs" />

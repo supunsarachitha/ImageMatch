@@ -24934,9 +24934,6 @@ namespace ImageMatch.Droid
 			// aapt resource value: 0x7F0700BC
 			public const int tooltip_frame_light = 2131165372;
 			
-			// aapt resource value: 0x7F0700BD
-			public const int xamarin_logo = 2131165373;
-			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
