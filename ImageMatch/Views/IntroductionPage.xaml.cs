@@ -24,7 +24,7 @@ namespace ImageMatch.Views
 			descriptionTexts.Add("you will meet many animals in the jungle");
 			descriptionTexts.Add("But, \n be careful..!");
 			descriptionTexts.Add("specially from the tiger!");
-			descriptionTexts.Add("you will loose life points if tiger catch you");
+			descriptionTexts.Add("you will loose life points if tiger catches you");
 			descriptionTexts.Add("Dont worry \n you will gain it back when you find a duck");
 			descriptionTexts.Add("Find all the ducks \n and bring them back to the farm");
 			descriptionTexts.Add("Good luck!!");

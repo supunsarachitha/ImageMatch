@@ -3,10 +3,10 @@
   <item>
     <color android:color="@color/splash_background"/>
   </item>
-  <item>
+ <!-- <item>
     <bitmap
-        android:src="@drawable/xamarin_logo"
+        android:src=""
         android:tileMode="disabled"
         android:gravity="center"/>
-  </item>
+  </item>-->
 </layer-list>

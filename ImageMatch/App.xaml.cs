@@ -4,7 +4,7 @@ using Xamarin.Forms.Xaml;
 using ImageMatch.Services;
 using ImageMatch.Views;
 using MediaManager;
-
+using ImageMatch.Helpers;
 
 namespace ImageMatch
 {
@@ -34,6 +34,10 @@ namespace ImageMatch
 
         protected override void OnSleep()
         {
+            if (Common.AudioPlayer.IsPlaying)
+            {
+                Common.AudioPlayer.Pause();
+            }
         }
 
         protected override void OnResume()
