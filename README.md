@@ -6,19 +6,19 @@ A Small mobile game designed using xamarin forms. Can run on both IOS and androi
 
 ## Media Attributes
 
-
+### Audio
 https://freesound.org/people/Mativve/sounds/391539/
 https://freesound.org/people/shinephoenixstormcrow/sounds/337049/
-https://lottiefiles.com/58795-sparkle-animation
-https://lottiefiles.com/77789-heart-pump-slow
 https://freesound.org/people/Mrthenoronha/sounds/518305/
 https://freesound.org/people/aarontheonly/sounds/614006/
+https://www.bensound.com
+
+### Animations
+https://lottiefiles.com/58795-sparkle-animation
+https://lottiefiles.com/77789-heart-pump-slow
 https://lottiefiles.com/82524-highest-level-reached
 https://lottiefiles.com/67154-duck
 https://lottiefiles.com/2160-get-started-button
-https://www.bensound.com
-
-
 
 Image by <a href="https://pixabay.com/users/annaliseart-7089643/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4997623">DONT SELL MY ARTWORK AS IS</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=4997623">Pixabay</a>
 
