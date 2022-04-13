@@ -11,7 +11,7 @@
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.1.0" />
     <PackageReference Include="Plugin.MediaManager.Forms" Version="1.1.0" />
     <PackageReference Include="Plugin.MediaManager" Version="1.1.0" />
-    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.5.0" />
+    <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\" />
@@ -52,10 +52,14 @@
     <None Remove="Assets\2160-get-started-button.json" />
     <None Remove="Audio\bensound-jazzcomedy.mp3" />
     <None Remove="Assets\safari-4136674_640.jpg" />
+    <None Remove="Models\" />
+    <None Remove="Documents\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Models\" />
+    <Folder Include="Documents\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="bin\Debug\netstandard2.0\ImageMatch.deps.json" />

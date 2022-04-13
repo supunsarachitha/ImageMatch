@@ -355,13 +355,5 @@ namespace ImageMatch.Views
 
 		public string ImageUrl { get; set; }
 	}
-
-	public class RemoteImageList
-    {
-		public int Id { get; set; }
-
-		public string URL { get; set; }
-
-	}
 }
 
