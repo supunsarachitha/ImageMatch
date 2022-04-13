@@ -14,7 +14,7 @@ namespace ImageMatch.Views
 		public IntroductionPage ()
 		{
 			InitializeComponent ();
-			PlaySound("bensound-jazzcomedy.mp3");
+			Common.PlaySound("bensound-jazzcomedy.mp3");
 
 			List<string> descriptionTexts = new List<string>();
 			descriptionTexts.Add("This is Jim, \n Our friendly farmer");
@@ -82,22 +82,9 @@ namespace ImageMatch.Views
 			});
 		}
 
-		private async void PlaySound(string name)
-		{
-			var stream = GetStreamFromFile(name);
-			
-			Common.AudioPlayer.Load(stream);
-			Common.AudioPlayer.Play();
-		}
+		
 
-		Stream GetStreamFromFile(string filename)
-		{
-			var assembly = typeof(App).GetTypeInfo().Assembly;
-
-			var stream = assembly.GetManifestResourceStream("ImageMatch.Audio." + filename);
-
-			return stream;
-		}
+		
 
 		void btnAnimationView_Clicked(System.Object sender, System.EventArgs e)
         {
