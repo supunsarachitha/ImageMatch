@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using ImageMatch.Helpers;
+using ImageMatch.Models;
 using MediaManager;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -16,7 +17,7 @@ namespace ImageMatch.Views
 	public partial class GamePage : ContentPage
 	{
 		public List<SelectedItems> SelectedIcons= new List<SelectedItems>();
-		List<RemoteImageList> remoteImageList = new List<RemoteImageList>();
+		List<RemoteImages> remoteImageList = new List<RemoteImages>();
 		List<SelectedItems> hiddenImageList = new List<SelectedItems>();
 		int SimilarSets = 1; //decide how many similar images should be selected to earn points
 		int mainImageId = 1; //decide which image should be selected to earn points
@@ -122,44 +123,44 @@ namespace ImageMatch.Views
 
         private void GetRemoteImages()
         {
-			remoteImageList.Add(new RemoteImageList()
+			remoteImageList.Add(new RemoteImages()
 			{
 				Id = 1,
 				URL= "https://www.iconfinder.com/icons/3316547/download/png/128"
 			});
 
-			remoteImageList.Add(new RemoteImageList()
+			remoteImageList.Add(new RemoteImages()
 			{
 				Id = 2,
 				URL = "https://www.iconfinder.com/icons/3316551/download/png/128"
 			});
 
-			remoteImageList.Add(new RemoteImageList()
+			remoteImageList.Add(new RemoteImages()
 			{
 				Id = 3,
 				URL = "https://www.iconfinder.com/icons/3316544/download/png/128"
 			});
 
-			remoteImageList.Add(new RemoteImageList()
+			remoteImageList.Add(new RemoteImages()
 			{
 				Id = 4,
 				URL = "https://www.iconfinder.com/icons/3316536/download/png/128"
 			});
 
-			remoteImageList.Add(new RemoteImageList()
+			remoteImageList.Add(new RemoteImages()
 			{
 				Id = 5,
 				URL = "https://www.iconfinder.com/icons/3316538/download/png/128"
 			});
 
-			remoteImageList.Add(new RemoteImageList()
+			remoteImageList.Add(new RemoteImages()
 			{
 				Id = 6,
 				URL = "https://www.iconfinder.com/icons/3316546/download/png/128"
 			});
 
 
-			remoteImageList.Add(new RemoteImageList()
+			remoteImageList.Add(new RemoteImages()
 			{
 				Id = 7,
 				URL = "https://www.iconfinder.com/icons/3316540/download/png/128"

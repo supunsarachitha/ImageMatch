@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using Plugin.SimpleAudioPlayer;
 
 namespace ImageMatch.Helpers
@@ -18,6 +20,23 @@ namespace ImageMatch.Helpers
 		public static string GamePageBackGroundImageURL = "https://www.iconfinder.com/icons/3305207/download/png/128";
 
 		public static ISimpleAudioPlayer AudioPlayer= Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
+
+
+
+		public static void PlaySound(string name)
+		{
+			var stream = GetStreamFromFile(name);
+
+			Common.AudioPlayer.Load(stream);
+			Common.AudioPlayer.Play();
+		}
+
+		public static Stream GetStreamFromFile(string filename)
+		{
+			var assembly = typeof(App).GetTypeInfo().Assembly;
+			var stream = assembly.GetManifestResourceStream("ImageMatch.Audio." + filename);
+			return stream;
+		}
 	}
 }
 
