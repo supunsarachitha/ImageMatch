@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ImageMatch.Services;
 using ImageMatch.Views;
 using MediaManager;
 using ImageMatch.Helpers;

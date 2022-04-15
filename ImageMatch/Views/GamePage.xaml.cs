@@ -33,23 +33,7 @@ namespace ImageMatch.Views
 			InitGame();
 		}
 
-		private void PlaySound(string name)
-        {
-            var stream = GetStreamFromFile(name);
-
-			Common.AudioPlayer.Load(stream);
-			Common.AudioPlayer.Play();
-
-        }
-
-		Stream GetStreamFromFile(string filename)
-		{
-			var assembly = typeof(App).GetTypeInfo().Assembly;
-
-			var stream = assembly.GetManifestResourceStream("ImageMatch.Audio." + filename);
-
-			return stream;
-		}
+	
 
 		private void InitGame()
         {
@@ -208,7 +192,7 @@ namespace ImageMatch.Views
 				
 				if (selected.TypeId == mainImageId)
                 {
-					PlaySound("SmallWin.mp3");
+					Common.PlaySound("SmallWin.mp3");
 					Matched(selected);
 				}
                 else if(selected.TypeId  == lifeLostImageId)
@@ -217,7 +201,7 @@ namespace ImageMatch.Views
 					lifeCount = lifeCount - 1;
 					lblLifeCount.Text = Convert.ToString(lifeCount);
 					selected.IsMatched = false;
-					PlaySound("614006__aarontheonly__roar3.mp3");
+					Common.PlaySound("614006__aarontheonly__roar3.mp3");
 				}
                 else
                 {
@@ -226,7 +210,7 @@ namespace ImageMatch.Views
 			}
             else if (SelectedIcons.Count == 0 && selected.TypeId == mainImageId)
 			{
-				PlaySound("SmallWin.mp3");
+				Common.PlaySound("SmallWin.mp3");
 				Matched(selected);
 			}
 
@@ -275,7 +259,7 @@ namespace ImageMatch.Views
 			//check fail count
 			if(lifeCount == 0)
             {
-				PlaySound("LooseSound.mp3");
+				Common.PlaySound("LooseSound.mp3");
 
 				Device.BeginInvokeOnMainThread(async () =>
 				{
@@ -309,7 +293,7 @@ namespace ImageMatch.Views
 
         private void PlayWinSound()
         {
-			PlaySound("518305__mrthenoronha__stage-clear-8-bit.mp3");
+			Common.PlaySound("518305__mrthenoronha__stage-clear-8-bit.mp3");
 		}
 
         private void Matched(SelectedItems selected)
