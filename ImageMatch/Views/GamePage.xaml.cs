@@ -16,9 +16,9 @@ namespace ImageMatch.Views
 
 	public partial class GamePage : ContentPage
 	{
-		public List<SelectedItems> SelectedIcons= new List<SelectedItems>();
+		public List<ModelItem> SelectedIcons= new List<ModelItem>();
 		List<RemoteImages> remoteImageList = new List<RemoteImages>();
-		List<SelectedItems> hiddenImageList = new List<SelectedItems>();
+		List<ModelItem> hiddenImageList = new List<ModelItem>();
 		int SimilarSets = 1; //decide how many similar images should be selected to earn points
 		int mainImageId = 1; //decide which image should be selected to earn points
 		int lifeLostImageId = 2; //reduce points
@@ -85,7 +85,7 @@ namespace ImageMatch.Views
 					var nextImage = remoteImageList[nextImageIndex];
 
 					hiddenImageList.Add(
-					new SelectedItems
+					new ModelItem
 					{
 						ImageUrl = nextImage.URL,
 						Id = hiddenImageListId,
@@ -152,11 +152,11 @@ namespace ImageMatch.Views
 		}
 
 
-		SelectedItems selected;
+		ModelItem selected;
         private void Button_Clicked(object sender, EventArgs e)
         {
 			//create an object by selected button and add to a list
-			selected  = new SelectedItems();
+			selected  = new ModelItem();
 			selected.Button = (Button)sender;
 			selected.GridRow = Grid.GetRow(selected.Button);
 			selected.GridColumn = Grid.GetColumn(selected.Button);
@@ -296,7 +296,7 @@ namespace ImageMatch.Views
 			Common.PlaySound("518305__mrthenoronha__stage-clear-8-bit.mp3");
 		}
 
-        private void Matched(SelectedItems selected)
+        private void Matched(ModelItem selected)
         {
 			score = score + 1;
 			lblScore.Text = Convert.ToString(score);
@@ -324,21 +324,5 @@ namespace ImageMatch.Views
 		}
     }
 
-    public class SelectedItems
-    {
-		public int Id { get; set; }
-
-		public Button Button { get; set; }
-
-		public bool IsMatched { get; set; }
-
-		public int TypeId { get; set; }
-
-		public int GridRow { get; set; }
-
-		public int GridColumn { get; set; }
-
-		public string ImageUrl { get; set; }
-	}
 }
 
