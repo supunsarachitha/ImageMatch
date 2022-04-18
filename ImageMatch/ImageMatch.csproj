@@ -12,6 +12,7 @@
     <PackageReference Include="Plugin.MediaManager.Forms" Version="1.1.0" />
     <PackageReference Include="Plugin.MediaManager" Version="1.1.0" />
     <PackageReference Include="Xam.Plugin.SimpleAudioPlayer" Version="1.6.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\" />
@@ -54,6 +55,7 @@
     <None Remove="Assets\safari-4136674_640.jpg" />
     <None Remove="Models\" />
     <None Remove="Documents\" />
+    <None Remove="Newtonsoft.Json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
