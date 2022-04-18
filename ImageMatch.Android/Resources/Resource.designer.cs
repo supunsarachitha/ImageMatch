@@ -15,7 +15,7 @@ namespace ImageMatch.Droid
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.2.99.104")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.3.0.26")]
 	public partial class Resource
 	{
 		
@@ -24933,9 +24933,6 @@ namespace ImageMatch.Droid
 			
 			// aapt resource value: 0x7F0700BC
 			public const int tooltip_frame_light = 2131165372;
-			
-			// aapt resource value: 0x7F0700BD
-			public const int xamarin_logo = 2131165373;
 			
 			static Drawable()
 			{
