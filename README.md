@@ -26,15 +26,6 @@ A Small mobile game designed using xamarin forms. Can run on both IOS and androi
 
 
 
-
-
-
-
-
-
-
-
-
 # MIT License
 
 ## Copyright (c) 2022 Supun Sarachitha Liyanaarachchi
