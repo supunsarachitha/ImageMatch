@@ -92,6 +92,8 @@ namespace ImageMatch.Views
 			Xamarin.Essentials.Preferences.Set("FIRST_TIME_USER", false);
 			App.Current.MainPage = new GamePage();
         }
+
+        
     }
 }
 

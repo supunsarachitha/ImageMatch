@@ -111,7 +111,6 @@ namespace ImageMatch.Views
 
         private void GetRemoteImages()
         {
-
 			using (WebClient wc = new WebClient())
             {
                 var json = wc.DownloadString(Common.RemoteImageUrl);
