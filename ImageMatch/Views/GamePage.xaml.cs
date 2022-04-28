@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Web;
 using ImageMatch.Helpers;
 using ImageMatch.Models;
 using MediaManager;
@@ -108,57 +111,57 @@ namespace ImageMatch.Views
 
         private void GetRemoteImages()
         {
-			//fetch data from url and deserialize
-			var model = JsonSerializer.Deserialize<List<RemoteImages>>("");
 
-            foreach (var item in model)
+			using (WebClient wc = new WebClient())
             {
-				remoteImageList.Add(item);
-
-			}
+                var json = wc.DownloadString(Common.RemoteImageUrl);
+				remoteImageList = JsonConvert.DeserializeObject<List<RemoteImages>>(json);
+            }
 
 			//remoteImageList.Add(new RemoteImages()
 			//{
-			//	Id = 1,
-			//	URL= "https://www.iconfinder.com/icons/3316547/download/png/128"
+			//    Id = 1,
+			//    URL = "https://www.iconfinder.com/icons/3316547/download/png/128"
 			//});
 
 			//remoteImageList.Add(new RemoteImages()
 			//{
-			//	Id = 2,
-			//	URL = "https://www.iconfinder.com/icons/3316551/download/png/128"
+			//    Id = 2,
+			//    URL = "https://www.iconfinder.com/icons/3316551/download/png/128"
 			//});
 
 			//remoteImageList.Add(new RemoteImages()
 			//{
-			//	Id = 3,
-			//	URL = "https://www.iconfinder.com/icons/3316544/download/png/128"
+			//    Id = 3,
+			//    URL = "https://www.iconfinder.com/icons/3316544/download/png/128"
 			//});
 
 			//remoteImageList.Add(new RemoteImages()
 			//{
-			//	Id = 4,
-			//	URL = "https://www.iconfinder.com/icons/3316536/download/png/128"
+			//    Id = 4,
+			//    URL = "https://www.iconfinder.com/icons/3316536/download/png/128"
 			//});
 
 			//remoteImageList.Add(new RemoteImages()
 			//{
-			//	Id = 5,
-			//	URL = "https://www.iconfinder.com/icons/3316538/download/png/128"
+			//    Id = 5,
+			//    URL = "https://www.iconfinder.com/icons/3316538/download/png/128"
 			//});
 
 			//remoteImageList.Add(new RemoteImages()
 			//{
-			//	Id = 6,
-			//	URL = "https://www.iconfinder.com/icons/3316546/download/png/128"
+			//    Id = 6,
+			//    URL = "https://www.iconfinder.com/icons/3316546/download/png/128"
 			//});
 
 
 			//remoteImageList.Add(new RemoteImages()
 			//{
-			//	Id = 7,
-			//	URL = "https://www.iconfinder.com/icons/3316540/download/png/128"
+			//    Id = 7,
+			//    URL = "https://www.iconfinder.com/icons/3316540/download/png/128"
 			//});
+
+
 		}
 
 

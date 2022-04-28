@@ -21,6 +21,8 @@ namespace ImageMatch.Helpers
 
 		public static ISimpleAudioPlayer AudioPlayer= Plugin.SimpleAudioPlayer.CrossSimpleAudioPlayer.Current;
 
+		public static string RemoteImageUrl = "https://api.jsonbin.io/b/6269cfef25069545a32a216f";
+
 
 
 		public static void PlaySound(string name)
@@ -37,6 +39,7 @@ namespace ImageMatch.Helpers
 			var stream = assembly.GetManifestResourceStream("ImageMatch.Audio." + filename);
 			return stream;
 		}
+
 	}
 }
 
