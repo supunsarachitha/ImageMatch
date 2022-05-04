@@ -109,6 +109,7 @@ namespace ImageMatch.Views
 			gamegrid.IsEnabled = true;
 		}
 
+		//calling to github json file and fetch images as json string
         private void GetRemoteImages()
         {
 			using (WebClient wc = new WebClient())
@@ -116,51 +117,6 @@ namespace ImageMatch.Views
                 var json = wc.DownloadString(Common.RemoteImageUrl);
 				remoteImageList = JsonConvert.DeserializeObject<List<RemoteImages>>(json);
             }
-
-			//remoteImageList.Add(new RemoteImages()
-			//{
-			//    Id = 1,
-			//    URL = "https://www.iconfinder.com/icons/3316547/download/png/128"
-			//});
-
-			//remoteImageList.Add(new RemoteImages()
-			//{
-			//    Id = 2,
-			//    URL = "https://www.iconfinder.com/icons/3316551/download/png/128"
-			//});
-
-			//remoteImageList.Add(new RemoteImages()
-			//{
-			//    Id = 3,
-			//    URL = "https://www.iconfinder.com/icons/3316544/download/png/128"
-			//});
-
-			//remoteImageList.Add(new RemoteImages()
-			//{
-			//    Id = 4,
-			//    URL = "https://www.iconfinder.com/icons/3316536/download/png/128"
-			//});
-
-			//remoteImageList.Add(new RemoteImages()
-			//{
-			//    Id = 5,
-			//    URL = "https://www.iconfinder.com/icons/3316538/download/png/128"
-			//});
-
-			//remoteImageList.Add(new RemoteImages()
-			//{
-			//    Id = 6,
-			//    URL = "https://www.iconfinder.com/icons/3316546/download/png/128"
-			//});
-
-
-			//remoteImageList.Add(new RemoteImages()
-			//{
-			//    Id = 7,
-			//    URL = "https://www.iconfinder.com/icons/3316540/download/png/128"
-			//});
-
-
 		}
 
 
