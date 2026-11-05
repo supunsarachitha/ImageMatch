@@ -1,7 +1,24 @@
 # Image Match
 
 
-A Small mobile game designed using xamarin forms. Can run on both IOS and android devices.
+A small mobile game designed using Xamarin.Forms. Can run on both iOS and Android devices.
+
+## How it plays
+
+- Tap the tiles in the grid to flip them over and find every tile showing the target image. Matches add to your score; uncovering the penalty image costs a life (you start each round with 5).
+- Each level makes the grid bigger. Your level is saved on the device.
+- First-time players get a short animated introduction, which can be skipped.
+- The images come from a list in [RemoteImages.json](https://supunsarachitha.github.io/ImageMatch/RemoteImages.json), so the picture set can change without a new app release.
+
+## Tech
+
+- Xamarin.Forms 5 shared project (`ImageMatch`, .NET Standard 2.0) with `ImageMatch.Android` and `ImageMatch.iOS` heads
+- Lottie animations, Xamarin.Essentials, Newtonsoft.Json and audio plugins (see the `.csproj` files for versions)
+- Android: minimum SDK 21, target SDK 30. iOS: minimum 8.0
+
+## Build
+
+Open `ImageMatch.sln` in Visual Studio with the Xamarin (Mobile development with .NET) workload, restore the NuGet packages, then run the `ImageMatch.Android` or `ImageMatch.iOS` project (iOS needs a Mac). Xamarin itself is out of support, so a current Visual Studio may need an older workload or migration to .NET MAUI.
 <img src="https://user-images.githubusercontent.com/36870488/162656617-383c87a3-7547-45f6-9f49-fcbe1e03584f.png" width="300"/> <img src="https://user-images.githubusercontent.com/36870488/162656662-2bfc376b-58af-4145-afa4-c829a9f0549f.png" width="300"/>
 
 ## Media Attributes
